@@ -71,3 +71,7 @@ body {
 textarea:focus {
     outline: none;
 }
+
+.ltr-input {
+    direction: ltr;
+  }
