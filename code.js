@@ -1,21 +1,20 @@
-//---------------------------------------------//
-
+const CryptoJS = require('crypto-js');
 
 function xx1() {
     let text = document.getElementById('t1').value;
-    let encryptionKey = document.getElementById('t2').value;
-    const dataToEncrypt = text + encryptionKey;
-    const encryptedData = btoa(dataToEncrypt);
-    document.getElementById('t1').value = encryptedData;
-    navigator.clipboard.writeText(encryptedData);
+    let password = document.getElementById('t2').value;
+    let encrypted = CryptoJS.AES.encrypt(text, password).toString();
+    encrypted = btoa(encrypted);
+    document.getElementById('t1').value = encrypted;
+    navigator.clipboard.writeText(encrypted);
 }
 
 function xx2() {
-    let text = document.getElementById('t1').value;
-    let encryptionKey = document.getElementById('t2').value;
-    const dataToDecrypt = atob(encryptedData);
-    const decryptedText = dataToDecrypt.replace(encryptionKey, '');
-    document.getElementById('t1').value = decryptedText;
-    navigator.clipboard.writeText(decryptedText);
+    let encryptedBase64 = document.getElementById('t1').value;
+    let password = document.getElementById('t2').value;
+    let encrypted = atob(encryptedBase64);
+    const decrypted = CryptoJS.AES.decrypt(encrypted, password).toString(CryptoJS.enc.Utf8);
+    document.getElementById('t1').value = decrypted;
+    navigator.clipboard.writeText(decrypted);
 }
 
